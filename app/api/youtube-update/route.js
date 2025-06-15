@@ -1,9 +1,10 @@
 import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 import { updateVideoMetadata } from '@/lib/youtube'
 
 export async function PUT(request) {
   try {
-    const session = await getServerSession()
+    const session = await getServerSession(authOptions)
     
     if (!session?.accessToken) {
       return Response.json({ error: 'Not authenticated' }, { status: 401 })
